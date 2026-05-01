@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
 import GardenCard, { type GardenProps } from "./components/GardenCard";
 
@@ -7,8 +7,15 @@ export default function App() {
   // const setGardenArray = gardenArrayState[1]
   const [gardenArray, setGardenArray] = useState<GardenProps[]>([]);
 
+  const dateInputRef = useRef<HTMLInputElement>(null);
+  const durationInputRef = useRef<HTMLInputElement>(null);
+  const descriptionInputRef = useRef<HTMLInputElement>(null);
+
   return (
     <div>
+      <input ref={dateInputRef} />
+      <input ref={durationInputRef} />
+      <input ref={descriptionInputRef} />
       <button
         onClick={() => {
           const newArray: GardenProps[] = [];
@@ -20,9 +27,9 @@ export default function App() {
           }
 
           newArray.push({
-            date: "28/4",
-            duration: "30 minutter",
-            description: "raket løv",
+            date: dateInputRef.current?.value,
+            duration: durationInputRef.current?.value,
+            description: descriptionInputRef.current?.value,
           });
 
           setGardenArray(newArray);

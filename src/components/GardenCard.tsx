@@ -1,7 +1,7 @@
 export type GardenProps = {
-  date: string;
-  duration: string;
-  description: string;
+  date: string | undefined;
+  duration: string | undefined;
+  description: string | undefined;
 };
 
 export default function GardenCard(props: GardenProps) {
