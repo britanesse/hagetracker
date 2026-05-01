@@ -1,23 +1,17 @@
 import { useState } from "react";
 import "./App.css";
-import GardenCard from "./components/GardenCard";
+import GardenCard, { type GardenProps } from "./components/GardenCard";
 
 export default function App() {
   // const gardenArray = gardenArrayState[0]
   // const setGardenArray = gardenArrayState[1]
-  const [gardenArray, setGardenArray] = useState([
-    {
-      date: "28/4",
-      duration: "30 minutter",
-      description: "raket løv",
-    },
-  ]);
+  const [gardenArray, setGardenArray] = useState<GardenProps[]>([]);
 
   return (
     <div>
       <button
         onClick={() => {
-          const newArray: any[] = [];
+          const newArray: GardenProps[] = [];
 
           for (let i = 0; i < gardenArray.length; i++) {
             const gardenInfo = gardenArray[i];

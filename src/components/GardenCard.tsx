@@ -1,8 +1,10 @@
-export default function GardenCard(props: {
+export type GardenProps = {
   date: string;
   duration: string;
   description: string;
-}) {
+};
+
+export default function GardenCard(props: GardenProps) {
   console.log(props);
 
   return (
