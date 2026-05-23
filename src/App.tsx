@@ -1,19 +1,24 @@
 import { useRef, useState } from "react";
 import "./App.css";
 import GardenCard, { type GardenProps } from "./components/GardenCard";
+import { formatDate } from "./utils";
 
 export default function App() {
+  const localData = localStorage.getItem("gardenData");
+  let gardenArrayInitial = [];
+  if (localData != null) {
+    gardenArrayInitial = JSON.parse(localData);
+  }
   // const gardenArray = gardenArrayState[0]
   // const setGardenArray = gardenArrayState[1]
-  const [gardenArray, setGardenArray] = useState<GardenProps[]>([]);
+  const [gardenArray, setGardenArray] =
+    useState<GardenProps[]>(gardenArrayInitial);
 
-  const dateInputRef = useRef<HTMLInputElement>(null);
   const durationInputRef = useRef<HTMLInputElement>(null);
   const descriptionInputRef = useRef<HTMLInputElement>(null);
 
   return (
     <div>
-      <input ref={dateInputRef} />
       <input ref={durationInputRef} />
       <input ref={descriptionInputRef} />
       <button
@@ -26,11 +31,15 @@ export default function App() {
             newArray.push(gardenInfo);
           }
 
+          const today = new Date();
+
           newArray.push({
-            date: dateInputRef.current?.value,
+            date: formatDate(today),
             duration: durationInputRef.current?.value,
             description: descriptionInputRef.current?.value,
           });
+
+          localStorage.setItem("gardenData", JSON.stringify(newArray));
 
           setGardenArray(newArray);
         }}
