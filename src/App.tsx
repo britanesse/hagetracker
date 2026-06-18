@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
 import "./App.css";
 import GardenCard, { type GardenProps } from "./components/GardenCard";
-import { formatDate } from "./utils";
+import { download, formatDate } from "./utils";
 
 export default function App() {
   const localData = localStorage.getItem("gardenData");
@@ -9,6 +9,7 @@ export default function App() {
   if (localData != null) {
     gardenArrayInitial = JSON.parse(localData);
   }
+
   // const gardenArray = gardenArrayState[0]
   // const setGardenArray = gardenArrayState[1]
   const [gardenArray, setGardenArray] =
@@ -45,6 +46,17 @@ export default function App() {
         }}
       >
         add
+      </button>
+      <button
+        onClick={() => {
+          const gardenTrackerData = localStorage.getItem("gardenData");
+          console.log(gardenTrackerData);
+          if (gardenTrackerData != null) {
+            download("gardentracker", gardenTrackerData);
+          }
+        }}
+      >
+        export
       </button>
       {gardenArray.map((gardenInfo) => (
         <GardenCard
