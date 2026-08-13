@@ -58,6 +58,20 @@ export default function App() {
       >
         export
       </button>
+      <input
+        type="file"
+        onChange={async (event) => {
+          const firstFile = event.target.files?.[0];
+
+          const text = await firstFile?.text();
+          if (text != null) {
+            const gardenPropsArray = JSON.parse(text);
+
+            localStorage.setItem("gardenData", text);
+            setGardenArray(gardenPropsArray);
+          }
+        }}
+      />
       {gardenArray.map((gardenInfo) => (
         <GardenCard
           date={gardenInfo.date}
