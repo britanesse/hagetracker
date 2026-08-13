@@ -15,11 +15,10 @@ export function formatDate(date: Date) {
 
 export function download(filename: string, text: string) {
   let element = document.createElement("a");
-  element.setAttribute(
-    "href",
-    "data:application/json;charset=utf-8," + encodeURIComponent(text),
+  element.href = URL.createObjectURL(
+    new Blob([text], { type: "application/json" }),
   );
-  element.setAttribute("download", filename);
+  element.download = filename;
 
   element.style.display = "none";
   document.body.appendChild(element);
